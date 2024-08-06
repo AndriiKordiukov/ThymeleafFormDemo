@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table style="border: 1px solid black; padding: 10px">
+    <tr th:each="showflowers: ${flowersVariable}">
+        <td th:text="${showflowers}" />
+    </tr>
+</table>
+
+<table style="border: 1px solid black; padding: 10px">
+    <tr th:each="showCity: ${CityVariable}">
+        <td th:text="${showCity}" />
+    </tr>
+</table>
+</body>
+</html>

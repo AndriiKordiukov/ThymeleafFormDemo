@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Form</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        .content {
+
+            display: block;
+            margin: 0 auto;
+            max-width: 900px;
+            background-color: #dddddd;
+            justify-content: center;
+            text-align: center;
+            font-family: Roboto,serif;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .input {
+            padding: 5px;
+            margin: 15px;
+            font-size: 1.2em;
+        }
+        .label {
+            font-size: 1.3em;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #424242;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.5em;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+
+    <h1>Student Form</h1>
+    <form th:action="@{/}" th:object="${student}" method="post">
+        <label class="label" for="name">Student Name:</label>
+        <input class="input" type="text" id="name" th:field="*{name}" required minlength="3" maxlength="50" />
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        <br />
+        <label class="label" for="id">Student ID:</label>
+        <input class="input" type="text" id="id" th:field="*{id}" required pattern="^\d+$"/>
+        <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+        <br />
+        <div th:style="'display:' + (${student.isValid} ? 'block' : 'none')">INVALID DATA</div>
+        <button class="button" type="submit">Save</button>
+
+        <h2>Current Student object</h2>
+        <div>Student ID =
+            <span th:text="${student.getId}"></span>
+        </div>
+        <div>Student Name =
+            <span th:text="${student.getName}"></span>
+        </div>
+    </form>
+</div>
+</body>
+</html>
